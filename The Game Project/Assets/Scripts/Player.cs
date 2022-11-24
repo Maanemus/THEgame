@@ -23,7 +23,7 @@ public class Player : MonoBehaviour
         print(JumpTimer);
         if (IsGrounded())
         {
-            GroundedTimer = 1;
+            GroundedTimer = 0.2f;
         }
         float HorizontalMovement = Input.GetAxisRaw("Horizontal");
         rb.velocity = new Vector2(Speed * HorizontalMovement, rb.velocity.y);
@@ -36,19 +36,17 @@ public class Player : MonoBehaviour
         }
         if (Input.GetKeyDown("space"))
         {
-            JumpTimer = 1;
+            JumpTimer = 0;
         }
-        if (Input.GetKey("space") && GroundedTimer < 1)
+        if (Input.GetKey("space") && GroundedTimer > 0)
         {
-            if(JumpTimer >= 6)
-            {
-                
-                JumpTimer += 2;
-            }
+            
+            JumpTimer += 0.001f;
+           
             
         } else
         {
-            JumpTimer -= Time.deltaTime / 2;
+            JumpTimer -= Time.deltaTime;
         }
 
         if (JumpTimer > 0)
